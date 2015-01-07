@@ -13,5 +13,5 @@ inputvars="dwiraw"
 checkset_local_SetUpData $inputvars
 
 log "Make '$1'"
-run dwiPipeline-nofilt.py "$dwi_raw" $3
+run dwiPipeline-nofilt.py "$dwiraw" $3
 log_success "Made '$1'"
