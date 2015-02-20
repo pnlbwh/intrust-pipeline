@@ -41,3 +41,28 @@ fs2dwi_dwimask=$dwibetmask
 fs2dwi_fssubjectdir=$fs
 # Output
 fsindwi=$case/diff/$case.wmparc_in_dwi.nrrd
+
+# WMQL
+# Inputs
+wmql_tractography=$ukf
+wmql_wmparc=$fsindwi
+wmql_query=wmql_query.txt
+# Output
+wmql=$case/diff/$case.tracts
+
+# WMQL tract measures
+# Inputs
+tractmeasures_tracts=$wmql
+# Output
+tractmeasures=$case/diff/$case.tractmeasures.csv
+
+status_vars="\
+    t1atlasmask \
+    fs \
+    dwibetmask \
+    dwi_ed \
+    ukf \
+    fsindwi \
+    wmql \
+    "
+
