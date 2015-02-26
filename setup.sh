@@ -11,6 +11,8 @@ default.freesurfer.do          \
 default.ukf_2T.vtk.gz.do       \
 default.wmparc_in_dwi.nrrd.do  \
 default.tracts.do \
+default.tractmeasures.csv.do \
+default.tractvolumes.csv.do \
 "
 
 for dofile in $dofiles; do

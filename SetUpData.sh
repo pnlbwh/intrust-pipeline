@@ -56,6 +56,12 @@ tractmeasures_tracts=$wmql
 # Output
 tractmeasures=$case/diff/$case.tractmeasures.csv
 
+# WMQL tract volumes
+# Inputs
+tractvols_tracts=$wmql
+# Output
+tractvols=$case/diff/$case.tractvolumes.csv
+
 status_vars="\
     t1atlasmask \
     fs \
@@ -64,5 +70,7 @@ status_vars="\
     ukf \
     fsindwi \
     wmql \
+    tractmeasures \
+    tractvols \
     "
 
