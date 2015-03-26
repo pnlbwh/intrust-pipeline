@@ -3,8 +3,8 @@
 ########## Set these ############################################
 
 pnlutil=/projects/pnl/software/pnlutil/  # path to your 'pnlutil'
-#epi_correction=false  # turn DWI epi correction off
-epi_correction=true  # turn DWI epi correction on
+epi_correction=false  # turn DWI epi correction off
+#epi_correction=true  # turn DWI epi correction on
 
 #################################################################
 
