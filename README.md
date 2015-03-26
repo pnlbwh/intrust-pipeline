@@ -28,6 +28,8 @@ These should already be installed on standard linux/mac distributions.
 * ConvertBetweenFileFormats (https://github.com/BRAINSia/BRAINSTools)
 * TEEM unu (http://teem.sourceforge.net/unrrdu/)
 * ukftractography (https://github.com/pnlbwh/ukftractography)
+If using epi correction
+* ANTs 1.9 (http://sourceforge.net/projects/advants/files/ANTS/ANTS_1_9_x/)
 
 The last three are provided by
 [NAMICExternalProjects](https://github.com/BRAINSia/NAMICExternalProjects.git),
@@ -97,37 +99,51 @@ Here are the install instructions for each one.
     # http://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FSL
     ```
 
+9. (If using epi correction) ANTs 1.9
+
+    ```
+    # Follow directions at
+    # http://sourceforge.net/projects/advants/files/ANTS/ANTS_1_9_x/
+    ```
+
 
 ## Setup
 
 Once all the prerequiste software is installed you're ready to make an instance
 of the pipeline for your project.  First, clone this repo:
 
-    git clone https://github.com/pnlbwh/intrust-pipeline
+    git clone https://github.com/pnlbwh/intrust-pipeline my-pipeline
+    cd my-pipeline
 
-Second, edit line 4 of `setup.sh` to replace the filepath with the one where
-you you nstalled `pnlutil` above, and then run the script.  This copies the
-necessary pipeline .do scripts from `pnlutil` to the pipeline repo.
+Second, edit line 4 of `pipeline-files/setup.sh` to replace the filepath with
+the one where you installed `pnlutil` above, and then run the script.  This
+copies the necessary pipeline .do scripts from `pnlutil` to the pipeline repo.
 
+    cd pipeline-files
+    cp setup.sh.example setup.sh
     # edit setup.sh with e.g. pnlutil=~/software/pnlutil
     ./setup.sh
+    cd ..
 
 Next, create the text files `trainingt1s.txt` and `trainingmasks.txt`, with
 each line being the absolute file path to your t1's and masks that you'd like
-to use to generate the rest of your t1 masks.  I suggest 10 or 20 cases.
+to use to generate the rest of your t1 masks, around 10 or 20.  Save these
+in the root folder (`my-pipeline/`).
 
 Finally, create your own `SetUpData_inputs.sh`.  This defines the input T1's,
 DWI's, (and optionally T2's) and software specific to your project and system.
-Use `SetUpData_inputs.sh.example` as a guide.
+Use `pipeline-files/SetUpData_inputs.sh.example` as a guide.
 
-    cp SetUpData_inputs.sh.example SetUpData_inputs.sh
+    cp pipeline-files/SetUpData_inputs.sh.example SetUpData_inputs.sh
     # edit SetUpData_inputs.sh
 
 
 ## Run
 
 Now you are ready to execute the pipeline.  You are free to run the complete pipeline or just parts of
-it on your whole caselist or subsets of your caselist.
+it on your whole caselist or subsets of your caselist.  Note that the query scripts `missing`, `all`,
+and `completed`, the status scripts `logstatus` and `showstatus`, and the QC scripts `qclabels` and 
+`qc`, are from the `pnlutil` repository. 
 
 Examples:
 
@@ -144,11 +160,12 @@ Examples:
 You don't need to run these separately, any missing dependencies will be
 generated automatically.  For example, running 
 
-    redo `missing wmql` 
+    redo -k `missing wmql` 
 
 without any of the preceding commands will first generate `fsindwi` and `ukf`,
 which in turn will first generate `dwi_ed`, `dwibetmask`, and `fs`, which in
-turn will first generate `t1atlasmask`.  So this runs the whole pipeline.
+turn will first generate `t1atlasmask`.  So this runs the whole pipeline.  The
+`-k` flag means keep going if a target fails to build.
 
 More Examples:
 

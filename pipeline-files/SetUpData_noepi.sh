@@ -27,32 +27,17 @@ dwibetmask_dwi=$dwi_ed
 # Output
 dwibetmask=$case/diff/$case.dwibetmask.nrrd  
 
-# DWI epi correction
-# Inputs
-epi_dwi=$dwi_ed
-epi_dwimask=$dwibetmask
-epi_t2=$t2
-# Output
-dwiepi=$case/diff/$case.dwi-epi.nrrd
-
-# DWI epi mask (for ukftractography seed map)
-# Input
-dwiepimask_dwi=$epi
-# Output
-dwiepimask=$case/diff/$case.dwi-epi-mask.nrrd
-
 # UKF
 # Inputs
-ukf_dwi=$dwiepi
-ukf_dwimask=$dwiepimask
+ukf_dwi=$dwi_ed
+ukf_dwimask=$dwibetmask
 # Output
 ukf=$case/diff/$case.ukf_2T.vtk.gz
 
 # Freesurfer to DWI registration
 # Inputs
-fs2dwi_dwi=$dwiepi
-fs2dwi_t2=$t2
-fs2dwi_dwimask=$dwiepimask
+fs2dwi_dwi=$dwi_ed
+fs2dwi_dwimask=$dwibetmask
 fs2dwi_fssubjectdir=$fs
 # Output
 fsindwi=$case/diff/$case.wmparc_in_dwi.nrrd
