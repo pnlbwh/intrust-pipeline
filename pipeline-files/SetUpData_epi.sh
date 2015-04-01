@@ -51,11 +51,10 @@ ukf=$case/diff/$case.ukf_2T.vtk.gz
 # Freesurfer to DWI registration
 # Inputs
 fsindwi_dwi=$dwiepi
-fsindwi_t2=$t2
 fsindwi_dwimask=$dwiepimask
 fsindwi_fssubjectdir=$fs
 # Output
-fsindwi=$case/diff/$case.fs-in-dwi.nrrd
+fsindwi=$case/diff/$case.fsindwi.nrrd
 
 # WMQL
 # Inputs
