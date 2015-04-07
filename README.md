@@ -28,13 +28,18 @@ These should already be installed on standard linux/mac distributions.
 * ConvertBetweenFileFormats (https://github.com/BRAINSia/BRAINSTools)
 * TEEM unu (http://teem.sourceforge.net/unrrdu/)
 * ukftractography (https://github.com/pnlbwh/ukftractography)
-If using epi correction
-* ANTs 1.9 (http://sourceforge.net/projects/advants/files/ANTS/ANTS_1_9_x/)
+* ANTs (https://github.com/stnava/ANTs)
 
-The last three are provided by
+The last five are provided by
 [NAMICExternalProjects](https://github.com/BRAINSia/NAMICExternalProjects.git),
 so starting from scratch means you'll need to install eight software packages.
-Here are the install instructions for each one.
+
+If you would like to use DWI EPI correction, you will also need version 1.9 of
+ANTs:
+
+* ANTs 1.9 (http://sourceforge.net/projects/advants/files/ANTS/ANTS_1_9_x/)
+
+Here are the install instructions for each package.
 
 1. Redo
 
@@ -57,7 +62,7 @@ Here are the install instructions for each one.
     # Follow the instructions at http://surfer.nmr.mgh.harvard.edu/fswiki/DownloadAndInstall
     ```
 
-4. Python, ConvertBetweenFileFormats (BRAINSTools), unu (teem), bet, UKFTractography
+4. Python, ConvertBetweenFileFormats (BRAINSTools), ANTs, unu (teem), UKFTractography
 
     ```
     git clone https://github.com/BRAINSia/NAMICExternalProjects.git
@@ -71,7 +76,7 @@ Here are the install instructions for each one.
     Replace `$NEP` below with the path to your `NAMICExternalProjects-build`:
 
     ```
-    git clone skullstripping https://github.com/pnlbwh/skullstripping-ants
+    git clone https://github.com/pnlbwh/skullstripping-ants
     mkdir skullstripping-ants-build && cd skullstripping-ants-build
     cmake .. -DITK_DIR=$NEP/ANTS-build/ITKv4-build/ -DANTS_BUILD=$NEP/ANTS-build -DANTS_SRC=$NEP/ANTs
     make
@@ -106,37 +111,21 @@ Here are the install instructions for each one.
     # http://sourceforge.net/projects/advants/files/ANTS/ANTS_1_9_x/
     ```
 
-
 ## Setup
 
 Once all the prerequiste software is installed you're ready to make an instance
 of the pipeline for your project.  First, clone this repo:
 
-    git clone https://github.com/pnlbwh/intrust-pipeline my-pipeline
-    cd my-pipeline
+    git clone https://github.com/pnlbwh/intrust-pipeline mypipeline
+    cd mypipeline
 
-Second, edit line 4 of `pipeline-files/setup.sh` to replace the filepath with
-the one where you installed `pnlutil` above, and then run the script.  This
-copies the necessary pipeline .do scripts from `pnlutil` to the pipeline repo.
-
-    cd pipeline-files
-    cp setup.sh.example setup.sh
-    # edit setup.sh with e.g. pnlutil=~/software/pnlutil
-    ./setup.sh
-    cd ..
-
-Next, create the text files `trainingt1s.txt` and `trainingmasks.txt`, with
+Next, replace the file paths in `config/SetUpData.sh` with your own.  Create
+two text files: `config/trainingt1s.txt` and `config/trainingmasks.txt`, with
 each line being the absolute file path to your t1's and masks that you'd like
-to use to generate the rest of your t1 masks, around 10 or 20.  Save these
-in the root folder (`my-pipeline/`).
+to use to generate the rest of your t1 masks, around 10 or 20.  
 
-Finally, create your own `SetUpData_inputs.sh`.  This defines the input T1's,
-DWI's, (and optionally T2's) and software specific to your project and system.
-Use `pipeline-files/SetUpData_inputs.sh.example` as a guide.
-
-    cp pipeline-files/SetUpData_inputs.sh.example SetUpData_inputs.sh
-    # edit SetUpData_inputs.sh
-
+Finally, run `pipleline-files/setup.sh`.  This will copy the necessary `.do`
+scripts from your `pnlutil` repo to your pipeline folder.
 
 ## Run
 
