@@ -129,18 +129,21 @@ scripts from your `pnlutil` repo to your pipeline folder.
 
 ## Run
 
-Now you are ready to execute the pipeline.  You are free to run the complete pipeline or just parts of
-it on your whole caselist or subsets of your caselist.  Note that the query scripts `missing`, `all`,
-and `completed`, the status scripts `logstatus` and `showstatus`, and the QC scripts `qclabels` and 
-`qc`, are from the `pnlutil` repository. 
+Now you are ready to execute the pipeline.  You are free to run the complete
+pipeline or just parts of it on your whole caselist or subsets of your
+caselist.  Note that the query scripts `missing`, `all`, and `completed`, the
+status scripts `logstatus`, `showstatus` and `casestatus`, and the quality
+control scripts `qclabels` and `qc`, are from the `pnlutil` repository. 
 
 Examples:
 
+    redo 001.all  # Run whole pipeline for case '001'
+    redo  # Run whole pipeline for all cases
     missing t1atlasmask  # Print a list of the atlas masks not yet generated
-    redo `missing t1atlasmask`  # Generate all the missing atlas masks for your caselist 
+    redo `missing t1atlasmask`  # Generate all the missing atlas masks
     completed t1atlasmask  # Print a list of the completed t1 atlas masks
     redo `missing fs | head -n 2`  # Run freesurfer for the first 2 cases not yet run
-    redo `missing dwi_ed` # Generate eddy current corrected DWI's
+    redo `missing dwied` # Generate eddy current corrected DWI's
     redo `missing dwibetmask`  # Generated DWI masks
     redo `missing ukf` # Generate whole brain tractography 
     redo `missing fsindwi`  # Generate freesurfer labelmap in DWI space
@@ -152,7 +155,7 @@ generated automatically.  For example, running
     redo -k `missing wmql` 
 
 without any of the preceding commands will first generate `fsindwi` and `ukf`,
-which in turn will first generate `dwi_ed`, `dwibetmask`, and `fs`, which in
+which in turn will first generate `dwied`, `dwibetmask`, and `fs`, which in
 turn will first generate `t1atlasmask`.  So this runs the whole pipeline.  The
 `-k` flag means keep going if a target fails to build.
 
@@ -160,8 +163,8 @@ More Examples:
 
     all -f caselist_qc_ukf.txt ukf  # Print a list of tractography files for cases in 'caselist_qc_ukf.txt'
     redo `all -f caselist_qc_ukf.txt ukf` # Generate tractography files for cases only in 'caselist_qc_ukf.txt'
-    all dwi_ed 001 002 003  # Print a list of DWI's for cases 001, 002, 003
-    redo `all dwi_ed 001 002 003`  # Generate DWI's for cases 001, 002, 003
+    all dwied 001 002 003  # Print a list of DWI's for cases 001, 002, 003
+    redo `all dwied 001 002 003`  # Generate DWI's for cases 001, 002, 003
 
 To log the progress of the pipeline:
 
@@ -171,14 +174,19 @@ To show the last logged entry in `statuslog.csv`:
 
     showstatus
 
+To show the status of a particular case:
+
+    casestatus 001
+
 To visually inspect the results and save the cases that pass quality control to `caselist_qcpass_<var>`:
 
-    qc dwi_ed fsindwi  # Loads each case's DWI and freesurfer map into Slicer, one case at a time
+    qc dwied fsindwi  # Loads each case's DWI and freesurfer map into Slicer, one case at a time
     qc -l "001 002" t1align fs  # Load t1 and freesurfer map for cases 001 and 002
-    qc -f caselist_notchecked_wmql dwi_ed wmql  # Load DWI's and wmql tracts for cases in 'caselist_notchecked_wmql'
+    qc -f caselist_notchecked_wmql dwied wmql  # Load DWI's and wmql tracts for cases in 'caselist_notchecked_wmql'
 
 Finally, to generate a montage of image slices with a labelmap overlay:
 
     qclabels t1align t1atlasmask t1atlasmask.png
-    qclabels dwi_ed fsindwi fsindwi.png
+    qclabels dwied fsindwi fsindwi.png
     # see 'qclabels -h' on how to adjust the slice axis and dimension size
+    # Note: doesn't work so well on DWI's right now
