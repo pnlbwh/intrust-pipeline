@@ -17,8 +17,8 @@ EPICORRECTION=true
 #dwiraw=${base}$case/raw/$case-dwi-B3000.nrrd
 #t1align=${base}$case/strct/align-space/$case-t1w-realign.nhdr
 
-# --Optional-- (needed for dwi epi correction)
-#t2=${base}$case/raw/$case-t2w.nhdr
+# --Optional-- (t2: needed for dwi epi correction, masked much better than unmasked)
+#t2=${base}$case/raw/$case-t2w.nhdr 
  
 # --Alternate-- (if you have the variables set in another bash script)
 source $threet/SetUpData.sh

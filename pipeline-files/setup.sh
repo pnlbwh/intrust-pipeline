@@ -14,7 +14,6 @@ case=000 && source $setupdata
 [ -e "$targetdir/SetUpData.sh" ] || ln -s $setupdata $targetdir
 
 dofiles="\
-default.all.do \
 default.dwi-Ed.nrrd.do         \
 default.dwibetmask.nrrd.do     \
 default.freesurfer.do          \
