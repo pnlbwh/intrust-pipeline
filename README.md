@@ -39,6 +39,21 @@ ANTs:
 
 * ANTs 1.9 (http://sourceforge.net/projects/advants/files/ANTS/ANTS_1_9_x/)
 
+Afterwards, your filesystem tree should look something like this:
+
+```
+~/software
+    - NAMICExternalProjects
+    - NAMICExternalProjects-build
+    - skullstripping-ants
+    - skullstripping-ants-build
+    - freesurfer5.3
+    - measuretracts
+    - pnlutil
+    - tract_querier
+    - redo
+```
+
 Here are the install instructions for each package.
 
 1. Redo
