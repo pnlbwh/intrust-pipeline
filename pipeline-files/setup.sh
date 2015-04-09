@@ -33,4 +33,7 @@ done
 if $EPICORRECTION; then 
     [ -e $targetdir/default.dwi-epi.nrrd.do ] || cp $pnlutil/default.dwi-epi.nrrd.do $targetdir
     [ -e $targetdir/default.dwi-epi-mask.nrrd.do ] || cp $pnlutil/default.dwi-epi-mask.nrrd.do $targetdir
+else
+    [ ! -e $targetdir/default.dwi-epi.nrrd.do ] || rm $targetdir/default.dwi-epi.nrrd.do 
+    [ ! -e $targetdir/default.dwi-epi-mask.nrrd.do ] || rm $targetdir/default.dwi-epi-mask.nrrd.do 
 fi

@@ -53,7 +53,7 @@ else
     dwiepi="" # remove it from status_vars below
     # UKF
     # Inputs
-    ukf_dwi=$dwi_ed
+    ukf_dwi=$dwied
     ukf_dwimask=$dwibetmask
     # Output
     ukf=$diff/$case.ukf_2T.vtk.gz
