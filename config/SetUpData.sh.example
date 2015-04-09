@@ -7,26 +7,24 @@ export ANTSPATH_epi=/projects/schiz/software/deprecated/ANTs-1.9.y-Linux/bin/
 pnlutil=/projects/pnl/software/pnlutil/  # path to your 'pnlutil'
 
 # == EPI correction ==`
-EPICORRECTION=true
-#EPICORRECTION=false
+#EPICORRECTION=true
+EPICORRECTION=false
 
 # == Source data ==
-# --Required--
-#caselist=caselist.txt  # case list text file, one case per line
-#base=/projects/schiz/ra/azhu/Shanghai/
-#dwiraw=${base}$case/raw/$case-dwi-B3000.nrrd
-#t1align=${base}$case/strct/align-space/$case-t1w-realign.nhdr
-
+# --Required-- (base, caselist dwiraw, t1align)
+#base=/projects/schiz/pi/reckbo/intrust-pipeline # path to your pipeline folder
+#caselist=$base/config/caselist.txt  # case list text file, one case per line
+#shanghai=/projects/schiz/ra/azhu/Shanghai/
+#dwiraw=${shanghai}$case/raw/$case-dwi-B3000.nrrd
+#t1align=${shanghai}$case/strct/align-space/$case-t1w-realign.nhdr
 # --Optional-- (t2: needed for dwi epi correction, masked much better than unmasked)
-#t2=${base}$case/raw/$case-t2w.nhdr 
+#t2=${shanghai}$case/raw/$case-t2w.nhdr 
  
 # --Alternate-- (if you have the variables set in another bash script)
 source $threet/SetUpData.sh
-t2=$t2masked 
-
-# == Root Folder ==
-base=/projects/schiz/pi/reckbo/intrust-pipeline-3tepi/ # path to your pipeline folder
+#t2=$t2masked 
+base=/projects/schiz/pi/reckbo/intrust-pipeline-3t/ # path to your pipeline folder
 # ----------------------------------------------------------------------------
 
-# don't change this
-source $base/pipeline-files/dataEnv.sh
+
+source $base/pipeline-files/dataEnv.sh # don't change this

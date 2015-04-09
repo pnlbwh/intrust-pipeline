@@ -134,10 +134,21 @@ of the pipeline for your project.  First, clone this repo:
     git clone https://github.com/pnlbwh/intrust-pipeline mypipeline
     cd mypipeline
 
-Next, replace the file paths in `config/SetUpData.sh` with your own.  Create
-two text files: `config/trainingt1s.txt` and `config/trainingmasks.txt`, with
+All the configuration files specific to your project will be saved in
+`config/`.  These are `SetupData.sh`, your case list (a text file with a list
+of your project's case id's), and the two text files required by the automated
+mask generation (`skullstripping-ants`).  To make `SetUpData.sh`, use
+`SetUpData.sh.example` as a template, replacing the filepaths with your own.
+
+    cd config
+    cp SetUpData.sh.example SetUpData.sh
+    # replace filepaths in SetUpData.sh with your own and save
+
+Next, create two text files: `trainingt1s.txt` and `trainingmasks.txt`, with
 each line being the absolute file path to your t1's and masks that you'd like
-to use to generate the rest of your t1 masks, around 10 or 20.  
+to use to generate the rest of your t1 masks, around 10 or 20.  Finally, save
+your list of case id's in a text file, one per line, with the name you used in
+the variable `caselist` that you set in `SetUpData.sh`.
 
 Finally, run `pipleline-files/setup.sh`.  This will copy the necessary `.do`
 scripts from your `pnlutil` repo to your pipeline folder.
