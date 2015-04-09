@@ -28,7 +28,9 @@ dwibetmask_dwi=$dwied
 # Output
 dwibetmask=$diff/$case.dwibetmask.nrrd  
 
+status_vars_epi=""
 if $EPICORRECTION; then
+    status_vars_epi="dwiepi dwiepimask"
     # DWI epi correction
     # Inputs
     dwiepi_dwi=$dwied
@@ -49,20 +51,27 @@ if $EPICORRECTION; then
     ukf_dwimask=$dwiepimask
     # Output
     ukf=$diff/$case.ukf_2T.vtk.gz
+
+    # Freesurfer to DWI registration
+    # Inputs
+    fsindwi_dwi=$dwiepi
+    fsindwi_dwimask=$dwiepimask
 else
-    dwiepi="" # remove it from status_vars below
     # UKF
     # Inputs
     ukf_dwi=$dwied
     ukf_dwimask=$dwibetmask
     # Output
     ukf=$diff/$case.ukf_2T.vtk.gz
+
+    # Freesurfer to DWI registration
+    # Inputs
+    fsindwi_dwi=$dwied
+    fsindwi_dwimask=$dwibetmask
 fi
 
 # Freesurfer to DWI registration
 # Inputs
-fsindwi_dwi=$dwiepi
-fsindwi_dwimask=$dwiepimask
 fsindwi_fssubjectdir=$fs
 # Output
 fsindwi=$diff/$case.fsindwi.nrrd
@@ -95,7 +104,7 @@ status_vars="\
     fs \
     dwibetmask \
     dwied \
-    dwiepi \
+    $status_vars_epi \
     ukf \
     fsindwi \
     wmqltracts \
