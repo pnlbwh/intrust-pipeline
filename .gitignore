@@ -1,6 +1,0 @@
-*/
-!pipeline-files
-*.do
-!all.do
-!default.all.do
-SetUpData.sh
